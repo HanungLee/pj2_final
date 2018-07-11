@@ -1,7 +1,5 @@
 package com.example.q.cs496_pj2;
 
-import android.util.Log;
-
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;

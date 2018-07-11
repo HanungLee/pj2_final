@@ -1,41 +1,36 @@
 package com.example.q.cs496_pj2;
 
-        import android.app.ProgressDialog;
-        import android.content.Context;
-        import android.graphics.Color;
-        import android.graphics.drawable.ColorDrawable;
-        import android.os.AsyncTask;
-        import android.os.Bundle;
-        import android.support.v7.app.AppCompatActivity;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.ListAdapter;
-        import android.widget.SimpleAdapter;
-        import android.widget.Toast;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.google.gson.Gson;
 
-        import com.baoyz.swipemenulistview.SwipeMenu;
-        import com.baoyz.swipemenulistview.SwipeMenuCreator;
-        import com.baoyz.swipemenulistview.SwipeMenuItem;
-        import com.baoyz.swipemenulistview.SwipeMenuListView;
-        import com.google.gson.Gson;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
-
-        import java.io.BufferedReader;
-
-        import java.io.InputStream;
-        import java.io.InputStreamReader;
-
-        import java.net.HttpURLConnection;
-        import java.net.URL;
-        import java.util.ArrayList;
-        import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class FetchedActivity extends AppCompatActivity {
@@ -237,7 +232,6 @@ public class FetchedActivity extends AppCompatActivity {
                     new String[]{TAG_fName, TAG_lNAME, TAG_email},
                     new int[]{R.id.textView_list_fname, R.id.textView_list_lname, R.id.textView_list_email}
             );
-            mlistView.clearAnimation();
             mlistView.setAdapter(adapter);
 
             SwipeMenuCreator creator = new SwipeMenuCreator() {
