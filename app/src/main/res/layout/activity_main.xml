@@ -25,12 +25,12 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name">
+            app:title="">
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orderInCategory="200"/>
+                android:orderInCategory="200" />
 
 
         </android.support.v7.widget.Toolbar>
@@ -74,7 +74,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="160dp"
         android:layout_marginRight="15sp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_medal"
         android:visibility="invisible"
         app:backgroundTint="#ffffff"
         app:elevation="6dp"
@@ -88,7 +88,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="90dp"
         android:layout_marginRight="15sp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_add"
         android:visibility="invisible"
         app:backgroundTint="#ffffff"
         app:elevation="6dp"
@@ -100,8 +100,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15sp"
-        android:backgroundTint="#9500ff"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:backgroundTint="#ffffff"
+        android:src="@drawable/ic_up" />
 
 
 </android.support.design.widget.CoordinatorLayout>

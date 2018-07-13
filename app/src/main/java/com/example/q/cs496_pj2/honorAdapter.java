@@ -16,30 +16,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class honorAdapter extends RecyclerView.Adapter<honorAdapter.ViewHolder>  {
 
     Context context;
     JSONArray posts;
     JSONObject user_info;
     JSONObject my_likes;
 
-
-
-    public PostAdapter(Context context, JSONArray json, JSONObject user_info){
+    public honorAdapter(Context context, JSONArray json, JSONObject user_info){
 
         this.context = context;
         this.posts = json;
         this.user_info = user_info;
         //this.my_likes = my_likes;
-
-
     }
+
+
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder   {
 
-        private ImageView Vprofile;
         private TextView Vid;
         private TextView Vdate;
         private ImageView Vphoto;
@@ -49,41 +46,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private TextView Vlike_count2;
         private TextView Vlike_count3;
 
-        private TextView Vcomment_count;
         private String object_id;
         private JSONObject user_info;
 
         public ViewHolder(View v, JSONObject user_info) {
             super(v);
 
-            Vprofile = v.findViewById(R.id.profile_image);
-            Vid = v.findViewById(R.id.tv_name);
-            Vdate = v.findViewById(R.id.tv_date);
+            Vid = v.findViewById(R.id.textView3);
+            Vdate = v.findViewById(R.id.textView2);
             Vphoto = v.findViewById(R.id.photo);
             Vcontent = v.findViewById(R.id.tv_content);
             Vlike_button = v.findViewById(R.id.like_button);
-            /*Vlike_button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.d("pathdebug", "like button pressed");
 
-                    ConnectServer connectServer = new ConnectServer();
-                    try {
-                        Log.d("pathdebug", "like button pressed");
-                        ViewHolder holder = (ViewHolder) v.getParent();
-
-                        connectServer.requestPress_like(v.gethol.object_id, holder.user_info.get("email").toString());
-                        holder.Vlike_button.setImageResource(R.drawable.like_pressed);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });*/
             Vlike_count1 = v.findViewById(R.id.tv_like_count1);
             Vlike_count2 = v.findViewById(R.id.tv_like_count2);
             Vlike_count3 = v.findViewById(R.id.tv_like_count3);
 
-            Vcomment_count = v.findViewById(R.id.tv_comment_count);
             this.user_info = user_info;
         }
 
@@ -114,14 +92,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     @Override
-    public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, null);
-        ViewHolder vh = new ViewHolder(v, user_info);
+    public honorAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.honor, null);
+        honorAdapter.ViewHolder vh = new honorAdapter.ViewHolder(v, user_info);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position){
+    public void onBindViewHolder(final honorAdapter.ViewHolder holder, int position){
 
         JSONObject json = null;
 
@@ -146,13 +124,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         } catch (JSONException e) {
             Log.d("error", "json error 2");
         }
-
-        try {
-            holder.Vcomment_count.setText(json.get("comment_count").toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
 
 
         try {
@@ -186,7 +157,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
 
 
-
         holder.Vlike_count1.setText(Integer.toString(total_like));
         holder.Vlike_count2.setText(Integer.toString(my_like_count));
 
@@ -206,58 +176,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
 
 
-
-
-
-        holder.Vlike_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Log.d("pathdebug", "like button pressed");
-                if(!holder.Vlike_button.isClickable())
-                    return;
-                ConnectServer connectServer = new ConnectServer();
-                try {
-                    Log.d("pathdebug", "like button pressed");
-
-                    connectServer.requestPress_like(holder.object_id, holder.user_info.get("email").toString());
-                    holder.Vlike_button.setImageResource(R.drawable.like_pressed);
-
-                    int total_count = Integer.parseInt(holder.Vlike_count1.getText().toString())+1;
-                    int my_count = Integer.parseInt(holder.Vlike_count2.getText().toString())+1;
-
-                    holder.Vlike_count1.setText(Integer.toString(total_count));
-                    holder.Vlike_count2.setText(Integer.toString(my_count));
-
-                    float a = (float)my_count/(float)total_count*100;
-                    double my_contribution = Math.round(a*100d)/100d;
-                    holder.Vlike_count3.setText(Double.toString(my_contribution)+"%");
-
-                    JSONObject json_position = posts.getJSONObject(holder.getAdapterPosition());
-
-                    json_position.put("like_count", total_count);
-                    Log.d("pathdebug1111", "" + total_count);
-
-                    JSONArray liked_array = json_position.getJSONArray("liked");
-
-                    for(int i = 0; i < liked_array.length(); i++){
-                        if(liked_array.getJSONObject(i).get("user_id").toString().equals(user_info.get("email"))){
-
-                            JSONObject addob = new JSONObject();
-                            addob.put("email", user_info.get("email"));
-                            addob.put("number", my_count);
-
-                            Log.d("pathdebug1111", addob.toString());
-                            json_position.getJSONArray("liked").put(i, addob);
-
-                        }
-                    }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-            }
-        });
 
         String photo = null;
         try {

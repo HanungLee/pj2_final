@@ -174,12 +174,17 @@ public class PageTwo extends Fragment {
                 JSONObject response = null;
                 Log.d("pathdebug","my json++" + myJSON);
 
+                if(myJSON == null)
+                    return;
+
                 try {
                     response = new JSONObject(myJSON);
                 } catch (JSONException e) {
                     Log.d("error", myJSON);
 
                 }
+
+
 
                 Log.d("pathdebug","make new postadapter++");
                 Log.d("pathdebug","make ->" +response.toString());

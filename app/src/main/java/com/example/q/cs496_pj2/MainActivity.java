@@ -140,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements PageOneLogin.OnFr
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        setTitle("");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         pages = new ArrayList<>();
@@ -167,9 +169,16 @@ public class MainActivity extends AppCompatActivity implements PageOneLogin.OnFr
              pageone = LogoutFragment.newInstance();
              pagetwo = LogoutFragment.newInstance();
              pagethree = LogoutFragment.newInstance();
+            setTitle("");
+
         }
         else{
             Log.d("pathdebuglog", "oncreate token not null");
+            try {
+                setTitle(login_info.getString("id") + "님");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
             try {
@@ -254,6 +263,11 @@ public class MainActivity extends AppCompatActivity implements PageOneLogin.OnFr
 
                         pages.add(PageTwo.newInstance(login_info));
                         pages.add(PageTwo.newInstance(login_info));
+                        try {
+                            setTitle(login_info.get("name").toString() + " 님");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                         mViewPager.getAdapter().notifyDataSetChanged();
                     }
@@ -301,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements PageOneLogin.OnFr
                     mViewPager.getAdapter().notifyDataSetChanged();
 
                     saveLogout();
+                    setTitle("");
 
                 }
 
@@ -454,11 +469,16 @@ public class MainActivity extends AppCompatActivity implements PageOneLogin.OnFr
                 Toast.makeText(this, "Button1 :  insert new post", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, NewPostActivity.class);
                 intent.putExtra("login_info", login_info.toString());
-                startActivityForResult(intent, CODE_NEW_POST);
+                //startActivityForResult(intent, CODE_NEW_POST);
+                startActivity(intent);
                 break;
             case R.id.fab2:
                 anim();
                 Toast.makeText(this, "Button2", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(MainActivity.this, HonorActivity.class);
+                intent2.putExtra("login_info", login_info.toString());
+                startActivity(intent2);
+
                 break;
         }
 
@@ -497,10 +517,7 @@ public class MainActivity extends AppCompatActivity implements PageOneLogin.OnFr
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
 
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
